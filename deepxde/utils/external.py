@@ -238,7 +238,7 @@ def _pack_data(train_state):
     return y_train, y_test, best_y, best_ystd
 
 
-def plot_best_state(train_state):
+def plot_best_state(train_state, fname=None):
     """Plot the best result of the smallest training loss.
 
     This function only works for 1D and 2D problems. For other problems and to better
@@ -250,6 +250,8 @@ def plot_best_state(train_state):
     Args:
         train_state: ``TrainState`` instance. The second variable returned from
             ``Model.train()``.
+        fname (string): If `fname` is a string (e.g., 'best_state.png'), then save the
+            figure to the file of the file name `fname`.
     """
     if isinstance(train_state.X_train, (list, tuple)):
         print(
@@ -294,6 +296,9 @@ def plot_best_state(train_state):
             ax.set_xlabel("$x_1$")
             ax.set_ylabel("$x_2$")
             ax.set_zlabel("$y_{}$".format(i + 1))
+
+    if isinstance(fname, str):
+        plt.savefig(fname, dpi=300)
 
     # Residual plot
     # Not necessary to plot
